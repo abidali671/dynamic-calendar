@@ -189,7 +189,7 @@ const handleCreateMonthList = (isDynamicDate) => {
   [prev_month, selected_month, next_month].forEach((value, index) => {
     const month_element = month_year_toggler_element({
       index,
-      label: value.label,
+      label: index === 1 ? value.label : value.label.slice(0, 3),
     });
 
     month_list_items.push(month_element);
@@ -254,7 +254,6 @@ const handleAddEventOnMonths = (elements, isDynamicDate) => {
   elements.forEach(async (element, index) => {
     element.addEventListener("click", (event) => {
       event.preventDefault();
-
       selected_month = element.className.includes("calendar-nav__link--left")
         ? prev_month
         : element.className.includes("calendar-nav__link--right")
