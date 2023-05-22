@@ -53,7 +53,8 @@ let year_list_items = [];
 let selected_year = pathname_list[date_index + 1];
 let next_year = +selected_year + 1;
 let prev_year = selected_year - 1;
-
+let current_month = months_list[new Date().getMonth()];
+let current_date = new Date().getDate();
 let selected_month = pathname.includes("today")
   ? months_list[new Date().getMonth()]
   : months_list.find(
@@ -119,7 +120,10 @@ const createDates = () => {
     .fill(1)
     .map((_, index) => ({
       i: index + 1,
-      l: newpath + "/" + (index + 1),
+      l:
+        current_month.label !== selected_month.label &&
+        current_date !== index + 1 &&
+        newpath + "/" + (index + 1),
     }));
 
   updateElementsList();
