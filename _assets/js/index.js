@@ -63,6 +63,21 @@ let selected_month = pathname.includes("today")
 let prev_month = months_list[months_list.indexOf(selected_month) - 1];
 let next_month = months_list[months_list.indexOf(selected_month) + 1];
 
+const handleSelectChangeDate = () => {
+  const calendars = document.querySelectorAll(".section--full-calendar");
+  calendars.forEach((calendar) => {
+    calendar
+      .querySelector(".custom-select-container .select-items")
+      .querySelectorAll("div")
+      .forEach((option) => {
+        option.addEventListener("click", (e) => {
+          if (option.getAttribute("value"))
+            window.location.pathname = option.getAttribute("value");
+        });
+      });
+  });
+};
+
 // Function to fetch Dates from API
 const fetchDates = async () => {
   try {
@@ -98,7 +113,7 @@ const fetchDates = async () => {
 };
 // Function to Create Static Dates
 const createDates = () => {
-  let newpath = `/${pathname_list[0]}/${selected_month.label}`;
+  let newpath = `/${pathname_list[0] || "day"}/${selected_month.label}`;
 
   const day_list = Array(selected_month.totalDays)
     .fill(1)
@@ -297,19 +312,3 @@ if (pathname_list.find((name) => name === "date")) {
 } else {
   createDates();
 }
-
-const handleSelectChangeDate = () => {
-  const calendars = document.querySelectorAll(".section--full-calendar");
-
-  calendars.forEach((calendar) => {
-    calendar
-      .querySelector(".custom-select-container .select-items")
-      .querySelectorAll("div")
-      .forEach((option) => {
-        option.addEventListener("click", (e) => {
-          if (option.getAttribute("value"))
-            window.location.pathname = option.getAttribute("value");
-        });
-      });
-  });
-};
