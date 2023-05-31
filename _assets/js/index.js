@@ -121,9 +121,10 @@ const createDates = () => {
     .map((_, index) => ({
       i: index + 1,
       l:
-        current_month.label !== selected_month.label &&
-        current_date !== index + 1 &&
-        newpath + "/" + (index + 1),
+        current_month.label === selected_month.label &&
+        current_date === index + 1
+          ? undefined
+          : newpath + "/" + (index + 1),
     }));
 
   updateElementsList();
