@@ -1,4 +1,9 @@
 const full_calendar = document.querySelectorAll(".section--full-calendar");
+const initial_month = full_calendar[0]
+  .querySelector(".calendar-nav")
+  .children[1].querySelector(".calendar-nav__link")
+  .innerText.toLowerCase()
+  .trim();
 let date_list_select = [];
 let date_list = [];
 let month_list = [];
@@ -58,7 +63,8 @@ let current_date = new Date().getDate();
 let selected_month = pathname.includes("today")
   ? months_list[new Date().getMonth()]
   : months_list.find(
-      (month) => month.label === (pathname_list[date_index + 2] || "june")
+      (month) =>
+        month.label === (pathname_list[date_index + 2] || initial_month)
     );
 
 let prev_month = months_list[months_list.indexOf(selected_month) - 1];
